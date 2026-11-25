@@ -1,0 +1,28 @@
+{
+  "name": "sistema-reparacion-celulares",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch server.js",
+    "start": "node server.js",
+    "prisma:push": "prisma db push",
+    "prisma:generate": "prisma generate",
+    "test:qa": "node scripts/qa-smoke.js"
+  },
+  "dependencies": {
+    "@prisma/client": "6.12.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "helmet": "^8.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "prettier": "^3.10.1",
+    "prisma": "6.12.0"
+  }
+}

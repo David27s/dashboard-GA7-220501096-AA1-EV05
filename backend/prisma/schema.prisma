@@ -1,0 +1,56 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum EstadoOrden {
+  RECIBIDO
+  EN_REPARACION
+  TERMINADO
+  ENTREGADO
+  NO_REPARADO
+}
+
+enum MetodoPago {
+  EFECTIVO
+  TRANSFERENCIA
+  NEQUI
+  DAVIPLATA
+}
+
+model Cliente {
+  id        Int      @id @default(autoincrement())
+  nombre    String
+  telefono  String   @unique
+  createdAt DateTime @default(now())
+  ordenes   Orden[]
+}
+
+model Orden {
+  id            Int         @id @default(autoincrement())
+  codigo        String      @unique
+  clienteId     Int
+  marca         String
+  modelo        String
+  // Valor temporal para órdenes creadas antes de que existiera este campo.
+  danoReportado String      @default("")
+  estado        EstadoOrden @default(RECIBIDO)
+  notaAvance    String?     @default("")
+  fechaEstimada DateTime?
+  valorTotal    Int         @default(0)
+  metodoPago    MetodoPago?
+  pagado        Boolean     @default(false)
+  fechaPago     DateTime?
+  createdAt     DateTime    @default(now())
+  // El valor inicial permite actualizar registros históricos; Prisma lo renovará después en cada edición.
+  updatedAt     DateTime    @default(now()) @updatedAt
+  cliente       Cliente     @relation(fields: [clienteId], references: [id], onDelete: Restrict)
+
+  @@index([estado])
+  @@index([createdAt])
+  @@index([fechaPago])
+}

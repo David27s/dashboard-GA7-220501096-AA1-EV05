@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Consulta tu reparación</title>
+    <link rel="stylesheet" href="/admin/css/neo.css" />
+  </head>
+  <body>
+    <main class="contenedor" style="max-width: 620px; padding-top: 12vh">
+      <section class="tarjeta">
+        <h1>Consulta tu reparación</h1>
+        <p>Ingresa el código que recibiste, por ejemplo: REP-3948.</p>
+        <form id="formulario">
+          <input
+            id="codigo"
+            placeholder="REP-0000"
+            maxlength="8"
+            required
+          /><button class="primario">Ver estado</button>
+        </form>
+        <div id="resultado" class="oculto" style="margin-top: 22px"></div>
+        <p id="mensaje" class="error"></p>
+      </section>
+    </main>
+    <script src="/track.js"></script>
+  </body>
+</html>

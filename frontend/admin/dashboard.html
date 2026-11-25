@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Panel · Taller</title>
+    <link rel="stylesheet" href="css/neo.css" />
+  </head>
+  <body>
+    <main class="contenedor">
+      <div class="fila espacio">
+        <h1>Panel del taller</h1>
+        <button id="salir">Cerrar sesión</button>
+      </div>
+      <section class="cuadricula" id="resumen"></section>
+      <section class="tarjeta">
+        <h2>Recibir reparación</h2>
+        <form id="nuevaOrden">
+          <div class="dos cuadricula">
+            <input
+              name="nombre"
+              placeholder="Nombre del cliente"
+              required
+            /><input name="telefono" placeholder="Teléfono" required /><input
+              name="marca"
+              placeholder="Marca"
+              required
+            /><input name="modelo" placeholder="Modelo" required /><input
+              name="valorTotal"
+              type="number"
+              min="0"
+              placeholder="Valor total (COP)"
+            /><select name="metodoPago">
+              <option value="">Método (si ya pagó)</option>
+              <option>EFECTIVO</option>
+              <option>TRANSFERENCIA</option>
+              <option>NEQUI</option>
+              <option>DAVIPLATA</option>
+            </select>
+          </div>
+          <textarea
+            name="danoReportado"
+            placeholder="Daño reportado"
+            required
+          ></textarea
+          ><textarea
+            name="notaAvance"
+            placeholder="Nota inicial (opcional)"
+          ></textarea>
+          <div class="fila">
+            <label><input type="checkbox" name="pagado" /> Ya está pagado</label
+            ><button class="primario">Crear orden</button
+            ><span id="aviso"></span>
+          </div>
+        </form>
+      </section>
+      <section class="tarjeta">
+        <div class="fila espacio">
+          <h2>Órdenes recientes</h2>
+          <button id="recargar">Actualizar</button>
+        </div>
+        <div class="tabla">
+          <table>
+            <thead>
+              <tr>
+                <th>Código / cliente</th>
+                <th>Equipo</th>
+                <th>Estado</th>
+                <th>Pago</th>
+                <th>Acción</th>
+              </tr>
+            </thead>
+            <tbody id="ordenes"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+    <dialog id="gestor" class="modal">
+      <section class="tarjeta">
+        <div class="fila espacio">
+          <h2 id="tituloGestion">Gestionar reparación</h2>
+          <button type="button" id="cerrarGestor">×</button>
+        </div>
+        <form id="formGestion">
+          <div class="dos cuadricula">
+            <label
+              >Estado<select name="estado" required>
+                <option value="RECIBIDO">Recibido</option>
+                <option value="EN_REPARACION">En reparación</option>
+                <option value="TERMINADO">Terminado</option>
+                <option value="ENTREGADO">Entregado</option>
+                <option value="NO_REPARADO">No reparado</option>
+              </select></label
+            ><label
+              >Fecha estimada<input name="fechaEstimada" type="date" /></label
+            ><label
+              >Valor total (COP)<input
+                name="valorTotal"
+                type="number"
+                min="0"
+                required /></label
+            ><label
+              >Método de pago<select name="metodoPago">
+                <option value="">Sin definir</option>
+                <option value="EFECTIVO">Efectivo</option>
+                <option value="TRANSFERENCIA">Transferencia</option>
+                <option value="NEQUI">Nequi</option>
+                <option value="DAVIPLATA">Daviplata</option>
+              </select></label
+            >
+          </div>
+          <label class="bloque"
+            >Nota de avance (visible para el cliente)<textarea
+              name="notaAvance"
+              maxlength="1000"
+              placeholder="Describe el avance de la reparación"
+            ></textarea></label
+          ><label><input type="checkbox" name="pagado" /> Pago recibido</label>
+          <p class="ayuda">
+            Una reparación solo puede entregarse cuando el pago esté registrado.
+          </p>
+          <div class="fila">
+            <button class="primario">Guardar cambios</button
+            ><button type="button" id="cancelarGestor">Cancelar</button
+            ><span id="avisoGestion"></span>
+          </div>
+        </form>
+      </section>
+    </dialog>
+    <script src="js/app.js"></script>
+  </body>
+</html>
